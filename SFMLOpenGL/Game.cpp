@@ -336,19 +336,19 @@ void Game::update()
 #if (DEBUG >= 2)
 	DEBUG_MSG("Updating...");
 #endif
-	//// Update Model View Projection
+	//// Update Model View Projectiongh
 	////mvp = projection * viewLeft * model;
 
 	// Rotate about the z axis
-	model = rotate(model, 0.001f, glm::vec3(0, 0, 1)); // Rotate
+	//model = rotate(model, 0.001f, glm::vec3(0, 0, 1)); // Rotate
 
 
-	//Rotate about the y axis											  
-    model = rotate(model, 0.005f, glm::vec3(0, 1, 0)); // Rotate
+	////Rotate about the y axis											  
+ //   model = rotate(model, 0.005f, glm::vec3(0, 1, 0)); // Rotate
 
 
-	//rotate about the x axis												  
-	model = rotate(model, 0.003f, glm::vec3(1, 0, 0)); // Rotate
+	////rotate about the x axis												  
+	//model = rotate(model, 0.003f, glm::vec3(1, 0, 0)); // Rotate
 }
 
 void Game::render()

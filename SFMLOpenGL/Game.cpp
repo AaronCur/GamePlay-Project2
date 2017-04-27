@@ -71,15 +71,43 @@ void Game::run()
 				isRunning = false;
 			}
 
+			//Move camera along x-y
 			//TO rotate the cameras around the y axis to get them to look left/right
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D ) || sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D ))
 			{
-				viewLeft = rotate(viewLeft, 0.01f, glm::vec3(0, 1, 0)); // Rota
+				//viewLeft = rotate(viewLeft, 0.01f, glm::vec3(0, 1, 0)); // Rotate view 
+				//viewRight = rotate(viewRight, 0.01f, glm::vec3(0, 1, 0)); // Rotate view 
+				model = translate(model, glm::vec3(0.5, 0, 0));
 			}
 
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
 			{
-				viewLeft = rotate(viewLeft, -0.01f, glm::vec3(0, 1, 0)); // Rota
+				
+				model = translate(model, glm::vec3(-0.5, 0, 0));
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+			{
+				
+				model = translate(model, glm::vec3(0, 0.5, 0));
+			}
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+			{
+				
+				model = translate(model, glm::vec3(0, -0.5, 0));
+			}
+			
+
+			//move camera along x-z
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			{
+				
+				model = translate(model, glm::vec3(0, 0, 0.5));
+			}
+
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			{
+				
+				model = translate(model, glm::vec3(0, 0, -0.5));
 			}
 			
 
@@ -273,20 +301,20 @@ void Game::initialize()
 	// Projection Matrix 
 	projection = perspective(
 		45.0f,					// Field of View 45 degrees
-		4.0f / 3.0f,			// Aspect ratio
+		4.0f / 6.0f,			// Aspect ratio
 		5.0f,					// Display Range Min : 0.1f unit
 		100.0f					// Display Range Max : 100.0f unit
 		);
 
 	//// Camera Matrix
 	viewRight = lookAt(
-		vec3(2.0f, 4.0f, 10.0f),	// Camera (x,y,z), in World Space
+		vec3(0.5f, 4.0f, 10.0f),	// Camera (x,y,z), in World Space
 		vec3(0.0f, 0.0f, 0.0f),		// Camera looking at origin
 		vec3(0.0f, 1.0f, 0.0f)		// 0.0f, 1.0f, 0.0f Look Down and 0.0f, -1.0f, 0.0f Look Up
 		);
 
 	viewLeft = lookAt(
-		vec3(-2.0f, 4.0f, 10.0f),	// Camera (x,y,z), in World Space
+		vec3(-0.5f, 4.0f, 10.0f),	// Camera (x,y,z), in World Space
 		vec3(0.0f, 0.0f, 0.0f),		// Camera looking at origin
 		vec3(0.0f, 1.0f, 0.0f)		// 0.0f, 1.0f, 0.0f Look Down and 0.0f, -1.0f, 0.0f Look Up
 	);
@@ -308,19 +336,19 @@ void Game::update()
 #if (DEBUG >= 2)
 	DEBUG_MSG("Updating...");
 #endif
-	// Update Model View Projection
-	//mvp = projection * viewLeft * model;
+	//// Update Model View Projection
+	////mvp = projection * viewLeft * model;
 
-	// Rotate about the z axis
-	model = rotate(model, 0.001f, glm::vec3(0, 0, 1)); // Rotate
-
-
-	//Rotate about the y axis											  
-    model = rotate(model, 0.005f, glm::vec3(0, 1, 0)); // Rotate
+	//// Rotate about the z axis
+	//model = rotate(model, 0.001f, glm::vec3(0, 0, 1)); // Rotate
 
 
-	//rotate about the x axis												  
-	model = rotate(model, 0.003f, glm::vec3(1, 0, 0)); // Rotate
+	////Rotate about the y axis											  
+ //   model = rotate(model, 0.005f, glm::vec3(0, 1, 0)); // Rotate
+
+
+	////rotate about the x axis												  
+	//model = rotate(model, 0.003f, glm::vec3(1, 0, 0)); // Rotate
 }
 
 void Game::render()
@@ -332,7 +360,7 @@ void Game::render()
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	///For left eye 
+	///For right eye
 	glViewport(400, 0, 400, 600);
 	glLoadIdentity();
 
@@ -375,7 +403,7 @@ void Game::render()
 
 
 
-	//for right eye 
+	//for left eye 
 	glViewport(0, 0, 400, 600);
 	glLoadIdentity();
 	

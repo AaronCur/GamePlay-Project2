@@ -97,14 +97,14 @@ void Game::run()
 			}
 			
 
-			//move camera along x-z
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+			//move camera along z axis
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 			{
 				
 				model = translate(model, glm::vec3(0, 0, 0.5));
 			}
 
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 			{
 				
 				model = translate(model, glm::vec3(0, 0, -0.5));
@@ -339,16 +339,16 @@ void Game::update()
 	//// Update Model View Projection
 	////mvp = projection * viewLeft * model;
 
-	//// Rotate about the z axis
-	//model = rotate(model, 0.001f, glm::vec3(0, 0, 1)); // Rotate
+	// Rotate about the z axis
+	model = rotate(model, 0.001f, glm::vec3(0, 0, 1)); // Rotate
 
 
-	////Rotate about the y axis											  
- //   model = rotate(model, 0.005f, glm::vec3(0, 1, 0)); // Rotate
+	//Rotate about the y axis											  
+    model = rotate(model, 0.005f, glm::vec3(0, 1, 0)); // Rotate
 
 
-	////rotate about the x axis												  
-	//model = rotate(model, 0.003f, glm::vec3(1, 0, 0)); // Rotate
+	//rotate about the x axis												  
+	model = rotate(model, 0.003f, glm::vec3(1, 0, 0)); // Rotate
 }
 
 void Game::render()
